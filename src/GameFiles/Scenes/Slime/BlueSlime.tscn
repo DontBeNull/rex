@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://GameFiles/Sprites/Slime/blue-slime.png" type="Texture" id=1]
+[ext_resource path="res://GameFiles/Scripts/Slime/BlueSlime.gd" type="Script" id=2]
+[ext_resource path="res://GameFiles/Scripts/Slime/SlimeSprite.gd" type="Script" id=3]
+[ext_resource path="res://GameFiles/Scripts/Slime/SlimeCollision.gd" type="Script" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 14.5481
+
+[node name="BlueSlime" type="RigidBody2D"]
+mass = 0.5
+gravity_scale = 49.0
+contacts_reported = 4
+contact_monitor = true
+linear_damp = 10.0
+script = ExtResource( 2 )
+
+[node name="SlimeSprite" type="Sprite" parent="."]
+position = Vector2( 0.223595, -27.726 )
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 10
+frame = 1
+script = ExtResource( 3 )
+
+[node name="SlimeCollision" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+script = ExtResource( 4 )
+[connection signal="grow" from="SlimeSprite" to="SlimeCollision" method="_on_SlimeSprite_grow"]
